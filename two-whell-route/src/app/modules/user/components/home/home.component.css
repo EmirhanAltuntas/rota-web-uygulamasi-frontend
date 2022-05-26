@@ -1,0 +1,40 @@
+.postRow:hover{
+    cursor: pointer;
+    background-color: rgb(230, 230, 230) !important;
+  
+}
+#mainPost:hover{
+    border: 1px solid rgb(255, 7, 127) ;
+
+}
+#saveIcon{
+    width: fit-content;
+    height: auto;
+  
+    display: flex;
+    justify-content: center;
+    transition: all 100ms;
+
+}
+#saveImg{
+    width: 45px;
+    height: 45px;
+    margin: auto;
+}
+#saveImg:hover{
+  background-color: rgb(248, 15, 100);
+    transition: all 350ms;
+    border-radius: 5%;
+    transform: rotateZ(30deg);
+    
+}
+
+
+.yorumlar{
+    font-weight: 400;
+    font-size: 22px;
+    color: rgb(66, 66, 161);
+}
+.yorumlar:active{
+    color: rgb(181, 181, 227);
+}

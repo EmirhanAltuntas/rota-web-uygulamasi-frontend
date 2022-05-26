@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row" style="background-color:#e8e5ee;">
+    <div class="col-md-7 justify-content-end"><body class="text-center">
+      
+      <main class="form-signin">
+        <form [formGroup]="loginForm">
+          <img class="mb-4" src="assets/images/bike.png" alt="" width="72" height="57">
+          <h1 class="h3 mb-3 fw-normal">Lütfen Giriş Yap</h1>
+      
+          <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="email" pattern="[^\s]*">
+            <label for="floatingInput">E-posta</label>
+          </div>
+          <div class="form-floating mt-2">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName="password" pattern="[^\s]*">
+            <label for="floatingPassword">Parola</label>
+          </div>
+      
+          <div class="checkbox mb-3">
+            <label>
+            <a routerLink="../forgot-password">şifreni mi unuttun ?</a>
+            </label>
+          </div>
+          <button class="w-100 btn btn-lg btn-primary" type="submit" (click)="login()">Giriş yap</button>
+          <div class=" mt-3">
+              <label>
+               <p>Hesabın yok mu ?</p>
+              </label>
+            </div>
+          <button class="w-75 btn btn-lg btn-primary" type="submit" routerLink="../register">Hesap Oluştur</button>
+          <p class="mt-5 mb-3 text-muted">&copy; 2021–2022</p>
+        </form>
+      </main>
+      
+      
+          
+        </body>
+  </div>
+    <div class="col-md-5 d-flex justify-content-start m-auto" >
+      <div class="image" style="width: auto; height: auto; border-radius: 5px;  "><img src="assets/images/bycle-vector.png"  alt="..." style="object-fit:cover; width: 100%; height: 100%; border-radius: 5px;">
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani&display=swap');
+.baslik{
+	margin-left: 15px;
+}
+.baslik h4{
+	text-align: center;
+	margin-top: 15px;
+}
+@media screen and (max-width:830px) {
+
+	.conNav{
+		margin: auto;
+	}    
+}
+.navbar{
+    background-color: #ffffff !important;
+	border-bottom: 0.3px solid rgb(245, 205, 230);
+
+}
+#searchBox{
+    height: 235 !important;
+    border-radius: 20px 20px 20px 20px;
+    text-align: center;
+}
+.active{
+	color: black;
+	border-bottom: 1px solid rgb(55, 55, 55);
+}
+a{
+	font-size: 18px !important;
+	color: rgb(61, 61, 61) !important;
+}

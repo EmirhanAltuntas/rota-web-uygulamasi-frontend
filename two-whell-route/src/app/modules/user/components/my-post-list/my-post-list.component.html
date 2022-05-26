@@ -1,0 +1,30 @@
+<div class="container text-center p-4 m-0" style="background-color: rgb(243, 240, 240);">
+    <h1 *ngIf="dataloaded==false">  Henüz bir gönderiniz yok</h1>
+    <div class="row shadow  mb-5 border postRow "    *ngFor="let post of posts" style="background-color:rgb(247, 247, 247); ">
+        <div class="col-md-12 mb-2"  >
+                <div class="row " >
+                    <div class="col-md-12 text-end ">
+                     <h5 style="font-size: 15px; margin-top: 5px;">{{post.postDate|date:'short'}}</h5>
+                    </div>
+                </div>
+                <div class="row postRow "   (click)="setPost(currentPost)"  routerLink="/user/post-detail/{{post.postId}}" routerLinkActive="active" style=" border-bottom: 0.5px solidrgb(193, 193, 193);">
+                    <div class="col-md-4" style="border-right: 1px solid rgb(185, 185, 185);">
+                        <div class="row">
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <div class="image mt-2" style="width: 70px; height: 70px; border-radius: 5px; filter: drop-shadow(0 0 1px rgb(240, 26, 69));"><img [src]="getUserImage(post.userImages[0].imagePath)"  alt="..." style="object-fit:cover; width: 100%; height: 100%; border-radius: 5px;"></div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center  mb-2">
+                                {{post.firstName}} {{post.lastName}}
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="col-md-8 m-auto text-center ">  {{post.description}}</div>
+                </div>
+          
+        </div>
+    </div>
+</div>

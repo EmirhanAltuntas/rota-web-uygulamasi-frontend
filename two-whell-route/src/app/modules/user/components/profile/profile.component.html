@@ -1,0 +1,32 @@
+<div class="container mt-5 d-flex justify-content-center" *ngFor="let user of userDetail">
+  <div class="row "style="margin-top:50px">
+<div class="col-md-12 d-flex justify-content-center border p-3 " style="background-image: url(./assets/images/bike2.png); background-repeat:repeat; background-size: contain; background-color: rgba(0, 0, 0, 0.315); ; ">
+  <div class="card p-3 shadow container-fluid" >
+    <div class="d-flex align-items-center">
+    <div class="image" style="width: 125px; height: 125px; border-radius: 5px; filter: drop-shadow(0 0 1px rgb(240, 26, 69));"><img [src]="getUserImage(user.userImages[0].imagePath)"  alt="..." style="object-fit:cover; width: 100%; height: 100%; border-radius: 5px;"></div>
+    <div class="ml-3 w-200 m-auto" style="margin-left: 5px;">
+      
+      <h4 class="mb-0 mt-0">{{user.firstName}} {{user.lastName}}</h4> <span ><p style="opacity: 70%; font-size: 17px;">{{user.biography}}</p></span>
+      <div class="row">
+        <div class="col-md-12 d-flex justify-content-end">
+          <h5><span><div class="btn btn-info p-1" routerLink="../profile-edit"><img style="object-fit:cover; " src="./assets/images/settings.png" alt=""></div></span></h5>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    
+    
+    <div class="container">
+      <div class="py-3 ">
+        <ul class="nav justify-content-center border-top pb-3 mb-3">
+          <li class="nav-item"><a routerLink="./myposts" class="nav-link px-2 text-muted" routerLinkActive="active">Gönderilerim</a></li>
+          <li class="nav-item "><a  routerLink="./friends" class="nav-link px-2 text-muted" routerLinkActive="active">Arkadaşlar</a></li>
+          <li class="nav-item"><a routerLink="./communities"  class="nav-link px-2 text-muted" routerLinkActive="active">Topluluklar</a></li>
+        </ul>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+</div>
+  </div>

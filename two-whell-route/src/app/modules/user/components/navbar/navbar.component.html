@@ -1,0 +1,49 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow" style="background-color: rgb(252, 252, 252) !important;" >
+    <div class="container-fluid " >
+      <button  class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="col-3 conNav  d-flex justify-content-center text-center ">
+        <div  >
+          <span class="m-auto"><a id="logo" routerLink="./home" routerLinkActive="active" style="border: none; text-decoration: none;    font-family: 'Rajdhani', sans-serif !important; font-size: 30px !important;">iki teker rota </a></span>        </div>
+        
+    </div>
+  
+           <div class="col-md-9">
+                <div class="collapse navbar-collapse  justify-content-around" id="navbarTogglerDemo01">
+                  
+                  <div class="col-md-3">
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="ara" aria-label="ara" aria-describedby="basic-addon1" id="searchBox">
+                    </div>
+                  </div>
+  
+        <ul class="navbar-nav mb-2 mb-lg-0 " id="navUl" >
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="./home" routerLinkActive="active" > Anasayfa</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="./post" routerLinkActive="active">Gönderi Oluştur</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active">Keşfet</a>
+          </li>
+          <li class="nav-item dropdown" >
+            <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" routerLinkActive="active"  >
+               {{user.firstName +" "+ user.lastName}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" routerLink="./profile">profil</a></li>
+              <li><a class="dropdown-item" (click)="logout()">Çıkış yap</a></li>
+             
+            </ul>
+          </li>
+          <li class="nav-item">
+        </ul>
+      </div>
+           </div>   
+     
+    </div>
+  </nav>
+  

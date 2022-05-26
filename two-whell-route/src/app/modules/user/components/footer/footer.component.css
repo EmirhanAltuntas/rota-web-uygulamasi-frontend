@@ -1,0 +1,7 @@
+ul li a{
+    color: rgb(43, 43, 43) !important;
+}
+.border{
+    border-top: 0.3px solid rgb(245, 205, 230) !important;
+	border-bottom: 0.3px solid rgb(245, 205, 230) !important;
+}

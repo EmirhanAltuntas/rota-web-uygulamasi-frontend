@@ -1,0 +1,9 @@
+.card {
+    width: 400px;
+    border: none;
+    border-radius: 10px;
+    background-color: #fff
+}
+.active{
+    border-top: 0.5px solid rgb(56, 56, 56);
+}

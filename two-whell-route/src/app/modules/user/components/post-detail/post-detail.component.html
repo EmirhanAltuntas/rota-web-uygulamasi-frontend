@@ -1,0 +1,56 @@
+<div class="container mt-5 shadow border" style="background-image: linear-gradient(to right, rgb(247, 247, 247) , rgb(247, 247, 247), rgb(241, 241, 241));">
+    <div class="row " >
+        <div class="col-md-5 ">
+            <div id="map2" class="full m-3 ">
+        
+            </div>
+        </div>
+        <div class="col-md-7  "  *ngFor="let post of posts">
+            <div class="row border-bottom b-2 mt-3 " >
+                <div class="col-md-4 image" style="width: 90px; height: 70px; border-radius: 5px; filter: drop-shadow(0 0 1px rgb(255, 0, 51)); "><img [src]="getUserImage(post.userImages[0].imagePath)"  alt="..." style="object-fit:cover; width: 100%; height: 100%; border-radius: 5px; "></div>
+                <div class="col-md-4 m-auto text-start " style="padding-left: 0;">
+                    <span ><a style="font-size: 20px;" >{{post.firstName }} {{post.lastName}}</a></span>
+                 
+                </div>
+                <div class="col-md-4 text-center m-auto  " >
+                    <span><a style="font-size: 14px;" >{{post.postDate|date:'short'}}</a></span>
+                </div>
+               
+            </div>
+            <div class="row px-3 ">
+                <div class="col-md-12 mt-4  d-flex justify-content-center" style="background-color:  rgb(69, 69, 69);" >                
+              
+
+                    <div id="carouselExampleFade" class="carousel slide carousel-fade " data-bs-ride="carousel" style=" width: 300px; height: 200px; display: flex; background-color: black;">
+                    <div class="carousel-inner ">
+                        <div class="carousel-item active" *ngFor="let photo of photos  let i = index  "
+                        [ngClass]="{'active': i == 0 }">
+                        <img [src]="getPhoto(photo.photoPath) " class="d-block w-100" alt="..." style="width:300px; height:200px; object-fit: cover; object-position:50% 15%">
+                        </div>
+                    
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    </div>
+
+                
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-12 mt-4 p-4 d-flex justify-content-center">
+                    <p class="border-bottom " style="font-size: 18px;">
+                        {{post.description}}
+                    </p>
+                   
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
