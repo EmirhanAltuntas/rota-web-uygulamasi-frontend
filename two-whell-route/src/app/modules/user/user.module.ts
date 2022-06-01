@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
 import { RouteListComponent } from './components/route-list/route-list.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
+import { AddCommentComponent } from './components/add-comment/add-comment.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
     PostDetailComponent,
     RouteListComponent,
     ProfileEditComponent,
+    AddCommentComponent,
   ],
   imports: [
     CommonModule,

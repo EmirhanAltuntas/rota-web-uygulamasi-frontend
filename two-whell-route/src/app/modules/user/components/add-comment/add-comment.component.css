@@ -1,0 +1,8 @@
+#commentArea{
+    border: none;
+    border-bottom: 0.5px solid rgb(156, 155, 155);
+    width: auto;
+    border-radius:0 !important;
+    color: rgb(90, 89, 89);
+    
+}

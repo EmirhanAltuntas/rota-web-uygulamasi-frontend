@@ -9,7 +9,7 @@ import { UserImageService } from 'src/app/services/user-image.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
 
@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   dataloaded =false
   currentPost:Post
   users:UserDetail[]=[]
+  postDate: Date
   constructor(private postService:PostService,
     private userDetailService:UserDetailService,
     private userImageService:UserImageService,
@@ -48,6 +49,8 @@ export class HomeComponent implements OnInit {
  
   setPost(post:Post){
     this.currentPost=post
+    this.postService.addPostId(this.currentPost)
+    console.log(this.currentPost)
   }
 
 

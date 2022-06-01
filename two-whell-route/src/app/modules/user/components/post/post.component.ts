@@ -55,7 +55,7 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
     this.createPostForm();
     let loader = new Loader({
-      apiKey: 'API KEY'
+      apiKey: 'API-KEY'
     })
     this.list();
     loader.load().then(() => {

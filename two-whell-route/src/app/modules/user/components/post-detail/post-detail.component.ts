@@ -3,9 +3,11 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Loader } from '@googlemaps/js-api-loader';
 import { ToastrService } from 'ngx-toastr';
+import { Commentt } from 'src/app/models/commentt';
 import { Photo } from 'src/app/models/photo';
 import { Place } from 'src/app/models/place';
 import { PostDetail } from 'src/app/models/postDetail';
+import { CommentService } from 'src/app/services/comment.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { PhotoService } from 'src/app/services/photo.service';
 import { PlaceService } from 'src/app/services/place.service';
@@ -29,11 +31,15 @@ export class PostDetailComponent implements OnInit {
   marker: google.maps.Marker;
   paths:string[]
   photos:Photo[]
+  comments: Commentt[]
+  commentCount =0
   constructor(
     private postService:PostService,
     private userImageService:UserImageService,
     private photoService:PhotoService,
-    private activatedRoute:ActivatedRoute
+    private activatedRoute:ActivatedRoute,
+    private commentService: CommentService,
+    private localStorageService:LocalStorageService
     ) { }
 
 
@@ -45,10 +51,10 @@ export class PostDetailComponent implements OnInit {
     })
 
     let loader = new Loader({
-      apiKey: 'AIzaSyB_MUCPndUMeA1GDGpmigNjPbfwCBgWpG4'
+      apiKey: 'API-KEY'
     })
     loader.load().then(() => {
-      const location = { lat: 38.423733, lng: 	27.142826 }
+      const location = { lat: 38.30708, lng: 	29.36578 }
 
       this.map = new google.maps.Map(<HTMLDivElement>document.getElementById("map2"), {
         center: location,
@@ -103,26 +109,12 @@ export class PostDetailComponent implements OnInit {
 
   
       this.addMarker()
-
+      this.getCommentByPostId(this.localStorageService.getPostId())
 
   
    })
   }
-  addMarker(){
-    
-    let labelIndex = 0;
-      const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-    this.places.forEach(e => {
-    
-      let marker = new google.maps.Marker({
-        position: { lat: JSON.parse(e.latitude), lng: JSON.parse(e.longitude) },
-        map:this.map,
-      });
-      
-    });
-
-  }
+ 
 
   getPostDetail(postId:number){
     this.postService.getPostDetail(postId).subscribe(response=>{
@@ -140,10 +132,31 @@ export class PostDetailComponent implements OnInit {
     return this.photoService.getPhoto(imagePath);
   }
   getUserImage(imagePath:string){
-    return this.userImageService.getUserImage(imagePath);
-    
+    return this.userImageService.getUserImage(imagePath);  
   }
   
+  getCommentByPostId(postId:number){
+    postId = this.localStorageService.getPostId()
+    this.commentService.getByPostId(postId).subscribe(response=>{
+       this.comments = response.data.sort((a, b) => (a.commentId > b.commentId ? -1 : 1))
+      this.commentCount = this.comments.length
+        console.log(response.data)
+    })
+  }
+  addMarker(){
+    
+    let labelIndex = 0;
+      const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-  
+    this.places.forEach(e => {
+    
+      let marker = new google.maps.Marker({
+        position: { lat: JSON.parse(e.latitude), lng: JSON.parse(e.longitude) },
+        map:this.map,
+        label: labels[labelIndex+1 % labels.length],
+      });
+      
+    });
+
+  }
 }
