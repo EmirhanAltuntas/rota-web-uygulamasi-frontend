@@ -3,4 +3,5 @@ export class Place{
     postId:number
     latitude:string
     longitude:string
+    placeName:string
 }

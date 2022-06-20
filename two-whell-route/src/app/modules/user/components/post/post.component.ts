@@ -32,17 +32,17 @@ export class PostComponent implements OnInit {
   filePaths: string[] = [];
   title = 'google-maps';
   textarea =""
-  
-
+  placeInput = ""
   poly: google.maps.Polyline;
   private map: google.maps.Map;
   places:string[]= [];
   placeItems:PlaceItem[]=[];
-  place:Place={placeId:0,postId:0,latitude:"",longitude:""};
+  place:Place={placeId:0,postId:0,latitude:"",longitude:"",placeName:""};
   placeItem = new PlaceItem();
   markers: google.maps.Marker[]=[];
-  clonePlaceItems:string
-
+  clonePlaceItems:string;
+  placeNames: string[] = []
+  
   constructor(private formBuilder:FormBuilder,
     private postService:PostService,
     private localStrorageService:LocalStorageService,
@@ -52,10 +52,11 @@ export class PostComponent implements OnInit {
     private router:Router
     ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    console.clear()
     this.createPostForm();
     let loader = new Loader({
-      apiKey: 'API-KEY'
+      apiKey: 'API_KEY'
     })
     this.list();
     loader.load().then(() => {
@@ -114,9 +115,9 @@ export class PostComponent implements OnInit {
         ]
       })
      this.poly = new google.maps.Polyline({
-        strokeColor: "#000000",
+        strokeColor: "rgb(0, 255, 221)",
         strokeOpacity: 1.0,
-        strokeWeight: 3,
+        strokeWeight: 5,
       });
       this.poly.setMap(this.map);
     
@@ -130,26 +131,40 @@ export class PostComponent implements OnInit {
   this.map.addListener("click", (mapsMouseEvent:any) => {
     // Close the current InfoWindow.
     infoWindow.close();
+
     this.places.push(JSON.stringify(mapsMouseEvent.latLng.toJSON(), null,2));
+   
     const path = this.poly.getPath();
     this.placeItems = [];
-
-
+    path.push(mapsMouseEvent.latLng)
+   // console.log(mapsMouseEvent.latLng)
+   
+    let placeName = (<HTMLInputElement>document.getElementById("placeNameInput")).value
+    this.placeNames.push(placeName);
+   // console.log(this.placeNames)
+    
     for (let i = 0; i < this.places.length; i++) {
-      this.place=new Place()
+      this.place=new Place();
+      
+      this.place.placeName = this.placeNames[i]
+   
       var gelen = JSON.parse(this.places[i]);
+      
       this.place.latitude =  String(gelen.lat);
       this.place.longitude = String(gelen.lng);
+
+     
+
      
     this.placeItem.place=this.place;
     let copied = Object.assign({}, this.placeItem);
 
       this.placeItems.push(copied);
-      this.clonePlaceItems =  JSON.stringify(Array.from(this.placeItems))
-      
+      this.clonePlaceItems =  JSON.stringify(Array.from(this.placeItems));
+     
 
     }
-
+    (<HTMLInputElement>document.getElementById("placeNameInput")).value = ""
    console.log(this.placeItems)
 
 
@@ -212,13 +227,15 @@ function addMarker(location: google.maps.LatLngLiteral, map: google.maps.Map) {
     console.log(e.target.result);
     
    }
-  post(){
+   async post(){
     if(this.postForm.valid){
       console.log(this.postForm.value)
       let post = Object.assign({},this.postForm.value)
+      let placeList = []
 
+      if(this.places.length>=5){
 
-      if(this.places.length>5){
+        
         this.postService.addPost(post).subscribe(response=>{
           this.postService.addPostId(response.data)
           this.postPhotos.forEach(e=>{
@@ -227,15 +244,25 @@ function addMarker(location: google.maps.LatLngLiteral, map: google.maps.Map) {
           this.placeItems.forEach(p=>{
         //    console.log(p.place)
             p.place.postId= this.localStrorageService.getPostId()
-            console.log(p)
-  
-           this.placeService.addPlace(p.place).subscribe(place=>{
-             console.log(place);
+                  
+          })  
+          
+        for (let i = 0; i < this.places.length; i++) { 
+          
+            placeList = [...this.placeItems] 
+            console.log(placeList)
+
+            this.placeService.addPlace(placeList[i].place ).subscribe(place=>{
+           //   console.log(place);
+             })
+            
+           
+          }
+
+
             })
           })
-            })
-          })
-          console.log(response.data)
+       //   console.log(response.data)
           this.toastrService.success(response.message)
         })
         this.postService.addPostId
@@ -253,6 +280,7 @@ function addMarker(location: google.maps.LatLngLiteral, map: google.maps.Map) {
     this.postService.removePostId
 
   }
+ 
   list(){
     return PlaceItems;
   }
@@ -260,7 +288,7 @@ function addMarker(location: google.maps.LatLngLiteral, map: google.maps.Map) {
     this.places.pop();
     
   }
- 
+
   clear(){
     window.scrollTo({ top: 0, left: 100, behavior: 'smooth' });
     this.places=[]
@@ -276,4 +304,5 @@ function addMarker(location: google.maps.LatLngLiteral, map: google.maps.Map) {
 
     
   }
+ 
 }

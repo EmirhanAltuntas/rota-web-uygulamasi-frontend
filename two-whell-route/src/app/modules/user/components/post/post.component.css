@@ -18,5 +18,5 @@ textarea:focus{
   height: 300px;
 }
 .bgGradient{
-  background-image: linear-gradient(to right, rgb(193, 212, 248) , rgb(206, 244, 201), rgb(233, 250, 189));
+  background-image: linear-gradient(to right, rgb(193, 248, 241) , rgb(206, 244, 201), rgb(233, 250, 189));
 }

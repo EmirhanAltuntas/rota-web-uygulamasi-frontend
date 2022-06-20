@@ -30,7 +30,7 @@ export class MyPostListComponent implements OnInit {
   getPostByUserId(userId:number){
     userId =this.localStorageService.getUserId()
     this.postService.getPostUserId(userId).subscribe(response=>{
-      this.posts = response.data
+      this.posts = response.data.sort((a, b) => (a.postId > b.postId ? -1 : 1))
       console.log(response.data)
       if(response.data.length>0){
         this.dataloaded =true

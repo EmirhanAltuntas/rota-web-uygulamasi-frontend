@@ -32,21 +32,12 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td>İzmir</td>
-                                <td>38.39446303208999</td>
-                                <td>27.1519813851962</td>
+                              <tr *ngFor="let place of places">
+                                <td>{{place.placeName}}</td>
+                                <td>{{place.latitude}}</td>
+                                <td>{{place.longitude}}</td>
                               </tr>
-                              <tr>
-                                <td>Aydın</td>
-                                <td>37.81525679289955</td>
-                                <td>27.8441200570712</td>
-                              </tr>
-                              <tr>
-                                <td>Denizli</td>
-                                <td>37.763163776093485</td>
-                                <td>29.11043006434767 </td>
-                              </tr>
+                             
                             </tbody>
                           </table>
                     </div>
@@ -57,6 +48,7 @@
                         <p>
                             350 km 
                         </p>
+                      
                     </div>
                 </div>
             </div>

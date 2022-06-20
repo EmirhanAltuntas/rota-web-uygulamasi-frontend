@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
 import { Place } from '../models/place';
 import { PlaceItem } from '../models/placeItem';
@@ -23,7 +24,9 @@ export class PlaceService {
   list(){
     return PlaceItems;
   }
-  addPlace(place:Place):Observable<ResponseModel>{
-    return this.httpClient.post<ResponseModel>(this.apiUrl+"add",place);
+   
+   addPlace(place:Place):Observable<ResponseModel>{
+      return  this.httpClient.post<ResponseModel>(this.apiUrl+"add",place);
   }
+ 
 }

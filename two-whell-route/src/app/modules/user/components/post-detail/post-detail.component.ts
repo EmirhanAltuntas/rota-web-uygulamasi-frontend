@@ -26,13 +26,17 @@ export class PostDetailComponent implements OnInit {
 
   posts:PostDetail[]
   places:Place[]=[]
-  private poly: google.maps.Polyline;
-  private map: google.maps.Map;
+  poly: google.maps.Polyline;
+  map :  google.maps.Map;
   marker: google.maps.Marker;
   paths:string[]
   photos:Photo[]
   comments: Commentt[]
   commentCount =0
+
+  localDate =  new Date()
+ 
+ 
   constructor(
     private postService:PostService,
     private userImageService:UserImageService,
@@ -51,14 +55,15 @@ export class PostDetailComponent implements OnInit {
     })
 
     let loader = new Loader({
-      apiKey: 'API-KEY'
+      apiKey: 'API_KEY'
     })
     loader.load().then(() => {
-      const location = { lat: 38.30708, lng: 	29.36578 }
+      const location = {  lat: 38.9615265098137, lng: 33.91597209953351 }
+      
 
       this.map = new google.maps.Map(<HTMLDivElement>document.getElementById("map2"), {
         center: location,
-        zoom: 7,
+        zoom: 6,
         styles: [
           {
             "featureType": "administrative.land_parcel",
@@ -106,11 +111,14 @@ export class PostDetailComponent implements OnInit {
           }
         ]
       })
-
-  
-      this.addMarker()
-      this.getCommentByPostId(this.localStorageService.getPostId())
-
+      this.poly = new google.maps.Polyline({
+        strokeColor: "rgb(0, 255, 221)",
+        strokeOpacity: 1.0,
+        strokeWeight: 3,
+      });
+      this.poly.setMap(this.map);
+     this.addMarker()
+      this.getCommentByPostId(this.localStorageService.getPostId())  
   
    })
   }
@@ -123,8 +131,7 @@ export class PostDetailComponent implements OnInit {
         this.places = e.places
         this.photos = e.photos
       });
-      console.log(this.photos)
-      console.log(this.places)
+
       console.log(response.data)
     })
   }
@@ -143,20 +150,37 @@ export class PostDetailComponent implements OnInit {
         console.log(response.data)
     })
   }
-  addMarker(){
+ async addMarker(){
+    const path = this.poly.getPath();
     
+   
     let labelIndex = 0;
       const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-    this.places.forEach(e => {
     
+    this.places.forEach(e => {
+     
+    
+    
+     
+      var latLng =  {lat:0,lng:0}
+      latLng.lat = Number.parseFloat(e.latitude)
+      latLng.lng = Number.parseFloat(e.longitude)
+      console.log(latLng.lat)
+      var latlngdata = [  latLng.lat,latLng.lng];
+      for( let i=0;i < latlngdata.length;i=i+2) {
+        var point =new google.maps.LatLng(latlngdata[i],latlngdata[i+1]);
+        path.push(point);
+      }
+   
+      
       let marker = new google.maps.Marker({
         position: { lat: JSON.parse(e.latitude), lng: JSON.parse(e.longitude) },
         map:this.map,
-        label: labels[labelIndex+1 % labels.length],
+        label: labels[labelIndex++ % labels.length],
       });
-      
+    
     });
 
   }
+
 }

@@ -58,4 +58,6 @@ export class ProfileEditComponent implements OnInit {
   getUserImage(imagePath:string){
     return this.userImageService.getUserImage(imagePath);
   }
+
+  
 }

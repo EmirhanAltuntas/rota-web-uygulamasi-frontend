@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
       let registerModel = Object.assign({}, this.registerForm.value)
       this.authService.register(registerModel).subscribe(response => {
         console.log(response)
-        this.toastrService.success(response.message)
+        this.toastrService.success("Kayıt Başarılı")
         console.log(response.message)
         this.authService.isAuthenticate(response.data)
         this.router.navigate(["/login"]);
